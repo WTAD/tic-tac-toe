@@ -62,6 +62,7 @@ class GamesController < ApplicationController
         if @game_state.put_the_symbol(symbol, params[:position])
           win_user = @game_state.who_won?
           if win_user
+            @game.win_user_id = win_user
             options = { :status => :game_is_over, :win_user => win_user.email }
           else
             @game_state.pass_the_turn
